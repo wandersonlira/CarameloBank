@@ -18,12 +18,13 @@ public class ContaCorrente extends Conta {
 //	sobreescrevendo métodos
 	
 	@Override
-	public boolean sacar(double valor) {
-		if (this.getSaldo() >= valor) {
-			this.setSaldo((getSaldo() - valor) - (0.1 * valor));
-			return true;
-		}
-		return false;
+	public void sacar(double valor) {
+		super.sacar(valor);
+//		if (this.getSaldo() >= valor) {
+//			this.setSaldo((getSaldo() - valor) - (0.1 * valor));
+//			return true;
+//		}
+//		return false;
 	}
 
 	

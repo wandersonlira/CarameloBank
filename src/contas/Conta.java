@@ -2,6 +2,8 @@ package contas;
 
 import dadospessoais.Cliente;
 import excecao.DepositoNegativoException;
+import excecao.SaldoInsuficienteException;
+import excecao.TransferenciaException;
 
 public abstract class Conta{
 	
@@ -14,25 +16,26 @@ public abstract class Conta{
 	
 //	Definindo métodos da class
 	
-	abstract boolean sacar(double valor);
-//		if (this.saldo >= valor) {
-//			this.saldo -= valor;
-//			return true;
-//		}
-//		
-//		return false;
-//	}
+	public void sacar(double valor) {
+		if (this.saldo < valor || valor <= 0) {
+			throw new SaldoInsuficienteException("Saldo: " + this.saldo + 
+					", Saque: " + valor);
+		} else { 
+			this.validarSenha(getSenha());
+			this.saldo -= valor; }
+		
+	}
 	
 	
 //	Este método realiza o depósito na conta
 	
-	public double deposita(double valor) throws DepositoNegativoException {
+	public double deposita(double valor) throws DepositoNegativoException, TransferenciaException {
 		if (valor > 0) {
 			this.saldo += valor;
 			return saldo;	
 			
 		} else {
-			throw new DepositoNegativoException("valor zero ou negativo não vale como depósito");
+			throw new DepositoNegativoException("valor Zero ou Negativo não vale como depósito");
 		}
 		
 	}
@@ -62,17 +65,15 @@ public abstract class Conta{
 	
 //	este método faz transferência da conta atual para a conta destino
 	
-	public boolean transfere(double valor, Conta destino) throws DepositoNegativoException{
+	public boolean transfere(double valor, Conta destino) throws TransferenciaException, DepositoNegativoException {
 		if (this.saldo >= valor) {
-			if (validarSenha(getSenha()) == true) {
-				this.saldo -= valor;
-				destino.deposita(valor);
-				return true;
-			}
-
-		}
+			this.sacar(valor);
+			destino.deposita(valor);
+			return true;
+			
+		} else { throw new TransferenciaException("Procedimento inválido! Saldo: " + this.saldo +
+				", Transferência: " + valor); }		
 		
-		return false; // irei implementar o retorno de uma exception
 	}
 	
 	
