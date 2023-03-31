@@ -1,6 +1,8 @@
 package contas;
 
 import dadospessoais.Cliente;
+
+
 import excecao.DepositoNegativoException;
 import excecao.SaldoInsuficienteException;
 import excecao.TransferenciaException;
@@ -65,15 +67,17 @@ public abstract class Conta{
 	
 //	este método faz transferência da conta atual para a conta destino
 	
-	public boolean transfere(double valor, Conta destino) throws TransferenciaException, DepositoNegativoException {
-		if (this.saldo >= valor) {
-			this.sacar(valor);
+	public boolean transfere(double valor, Conta destino) throws TransferenciaException, DepositoNegativoException{
+		if (this.getSaldo() < valor || valor <= 0) {
+
+			throw new TransferenciaException("Transferência inválida! Saldo: " + this.getSaldo() +
+					", Transferência: " + valor);
+			
+		} else {  
+			this.setSaldo(this.getSaldo() - valor);
 			destino.deposita(valor);
 			return true;
-			
-		} else { throw new TransferenciaException("Procedimento inválido! Saldo: " + this.saldo +
-				", Transferência: " + valor); }		
-		
+		}	
 	}
 	
 	
@@ -83,7 +87,6 @@ public abstract class Conta{
 		this.titular.exibirTitular();
 		this.titular.getEndereco().exibirEndereco();
 	}
-	
 
 	
 //  Criado método get e set para manipular os atributos

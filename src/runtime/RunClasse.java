@@ -31,7 +31,7 @@ public class RunClasse {
 		
 		
 		try {
-			contaWanderson.deposita(12);
+			contaWanderson.deposita(10);
 			
 		} catch(Exception ex) {
 			String msg = ex.getMessage();
@@ -43,7 +43,8 @@ public class RunClasse {
 			
 		
 		try {
-				contaRaquel.transfere(10, contaWanderson);
+				contaRaquel.transfere(5, contaWanderson);		
+
 				
 			} catch (Exception ex) {
 				
@@ -53,7 +54,8 @@ public class RunClasse {
 			}
 		
 		
-		contaRaquel.sacar(0);
+//	contaRaquel.sacar(10);
+		
 
 		//conta.getTitular().cadastrar();
 		

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Endereco {
 
 	private String rua;
-	private int numero_rua;
+	private int numeroCasa;
 	private String bairro;
 	private String cep;
 	private String uf;
@@ -21,8 +21,8 @@ public class Endereco {
 		System.out.printf("Rua: ");
 		this.rua = lerEndereco.nextLine();
 
-		System.out.printf("Nº_Rua: ");
-		this.numero_rua = lerEndereco.nextInt();
+		System.out.printf("NºCasa: ");
+		this.numeroCasa = lerEndereco.nextInt();
 		
 //		Limpando buffer
 		lerEndereco.nextLine();
@@ -44,7 +44,7 @@ public class Endereco {
 	public void exibirEndereco(){
 		
 		System.out.println("Rua: " + this.getRua());
-		System.out.println("Nº: " + this.getNumero_rua());
+		System.out.println("Nº: " + this.getNumeroCasa());
 		System.out.println("Bairro: " + this.getBairro());
 		System.out.println("CEP: " + this.getCep());
 		System.out.println("UF: " + this.getUf());
@@ -59,11 +59,11 @@ public class Endereco {
 	public void setRua(String rua) {
 		this.rua = rua;
 	}
-	public int getNumero_rua() {
-		return numero_rua;
+	public int getNumeroCasa() {
+		return numeroCasa;
 	}
-	public void setNumero_rua(int numero_rua) {
-		this.numero_rua = numero_rua;
+	public void setNumeroCasa(int numero_rua) {
+		this.numeroCasa = numero_rua;
 	}
 	public String getBairro() {
 		return bairro;
