@@ -1,4 +1,4 @@
-package com.caramelobank.contas;
+package com.caramelobank.project.contas;
 
 public abstract interface Tributaveis {
 

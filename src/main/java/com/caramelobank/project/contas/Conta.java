@@ -1,9 +1,6 @@
-package com.caramelobank.contas;
+package com.caramelobank.project.contas;
 
-import com.caramelobank.entities.Cliente;
-import com.caramelobank.exception.DepositoNegativoException;
-import com.caramelobank.exception.SaldoInsuficienteException;
-import com.caramelobank.exception.TransferenciaException;
+import com.caramelobank.project.entities.Cliente;
 
 public abstract class Conta{
 	
@@ -81,10 +78,10 @@ public abstract class Conta{
 	
 //	Exibe dados e endereço do cliente
 	
-	public void exibirCliente() {
-		this.titular.exibirTitular();
-		this.titular.getEndereco().exibirEndereco();
-	}
+//	public void exibirCliente() {
+//		this.titular.exibirTitular();
+//		this.titular.getEndereco().exibirEndereco();
+//	}
 
 	
 //  Criado método get e set para manipular os atributos

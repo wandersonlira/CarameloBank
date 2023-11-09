@@ -1,4 +1,4 @@
-package com.caramelobank.exception;
+package com.caramelobank.project.contas;
 
 public class SaldoInsuficienteException extends RuntimeException{
 	

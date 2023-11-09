@@ -1,9 +1,4 @@
-package com.caramelobank.contas;
-
-import com.caramelobank.exception.DepositoNegativoException;
-import com.caramelobank.exception.SaldoInsuficienteException;
-import com.caramelobank.exception.TransferenciaException;
-
+package com.caramelobank.project.contas;
 
 public class ContaCorrente extends Conta implements Tributaveis{
 	
