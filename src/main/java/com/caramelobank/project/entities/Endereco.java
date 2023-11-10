@@ -1,12 +1,17 @@
 package com.caramelobank.project.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -30,8 +35,11 @@ public class Endereco implements Serializable{
   	private String gia;
   	private String ddd;
   	private String siafi;
-  	
   	private String numeroCasa;
+  	
+  	@JsonIgnore
+  	@OneToMany(mappedBy = "tabEndereco")
+  	private List<Pessoa> clientes = new ArrayList<>();
 	
   	
   	
@@ -194,6 +202,11 @@ public class Endereco implements Serializable{
 
 	public void setNumeroCasa(String numeroCasa) {
 		this.numeroCasa = numeroCasa;
+	}
+	
+
+	public List<Pessoa> getClientes() {
+		return clientes;
 	}
 
 

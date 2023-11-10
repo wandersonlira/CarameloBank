@@ -8,12 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
 @Entity
 @Table(name = "tab_cliente")
-public class Cliente implements Serializable{
+public class Pessoa implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -26,14 +28,16 @@ public class Cliente implements Serializable{
 	private String profissao;
 	private LocalDate dataNascimento;
 	
-	protected Endereco tabEndereco;
+	@ManyToOne
+	@JoinColumn(name = "codigo_client_id")
+	private Endereco tabEndereco;
 
 	
 	
-	public Cliente() {}
+	public Pessoa() {}
 	
 	
-	public Cliente(Long idCliente, String nome, String cpf, String email, String profissao, 
+	public Pessoa(Long idCliente, String nome, String cpf, String email, String profissao, 
 			LocalDate dataNascimento, Endereco tabEndereco) {
 		super();
 		this.idCliente = idCliente;
@@ -61,7 +65,7 @@ public class Cliente implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Pessoa other = (Pessoa) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(idCliente, other.idCliente);
 	}
 

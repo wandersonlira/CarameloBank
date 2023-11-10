@@ -8,10 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.caramelobank.project.entities.Cliente;
 import com.caramelobank.project.entities.Endereco;
-import com.caramelobank.project.repositories.ClienteRepository;
+import com.caramelobank.project.entities.Pessoa;
 import com.caramelobank.project.repositories.EnderecoRepository;
+import com.caramelobank.project.repositories.PessoaRepository;
 import com.caramelobank.project.viacep.ConsultaCepAPI;
 
 @Configuration
@@ -19,7 +19,7 @@ import com.caramelobank.project.viacep.ConsultaCepAPI;
 public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private PessoaRepository pessoaRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
@@ -33,28 +33,28 @@ public class TestConfig implements CommandLineRunner{
 		Endereco endereco3 = new Endereco();
 		
 		ConsultaCepAPI api = new ConsultaCepAPI();
-//		ConsultaCepAPI api2 = new ConsultaCepAPI();
-//		ConsultaCepAPI api3 = new ConsultaCepAPI();
 		
 		endereco1 = api.consultaCep("50630160");
 		endereco2 = api.consultaCep("54400020");
 		endereco3 = api.consultaCep("50670901");
 		
-		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
 		
 		
+		Pessoa pessoa1 = new Pessoa(null, "Elon Musk", "00000000001", "bilionario@musk.com", "Ser Bilionário",
+				LocalDate.parse("1982-04-15"), endereco1);
+		
+		Pessoa pessoa2 = new Pessoa(null, "Lenin", "00000000002", "uniao@lenin.com", "Comunista",
+				LocalDate.parse("1911-10-20"), endereco2);
+		
+		Pessoa pessoa3 = new Pessoa(null, "Madona", "00000000003", "cantora@madona.com", "Cantora",
+				LocalDate.parse("1979-02-11"), endereco3);
 
 		
-//		Cliente cliente1 = new Cliente(null, "Elon Musk", "00000000001", "bilionario@musk.com", "Ser Bilionário",
-//				LocalDate.parse("1982-04-15"), endereco1);
-//		
-//		Cliente cliente2 = new Cliente(null, "Lenin", "00000000002", "uniao@lenin.com", "Comunista",
-//				LocalDate.parse("1911-10-20"), endereco2);
-//		
-//		Cliente cliente3 = new Cliente(null, "Madona", "00000000003", "cantora@madona.com", "Cantora",
-//				LocalDate.parse("1979-02-11"), endereco3);
-//		
-//		clienteRepository.saveAll(Arrays.asList(cliente1, cliente2, cliente3));
+		
+		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
+		pessoaRepository.saveAll(Arrays.asList(pessoa1, pessoa2, pessoa3));
+		
+		System.out.println("PRONTO!!");
 		
 		
 		

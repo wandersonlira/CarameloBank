@@ -1,6 +1,6 @@
 package com.caramelobank.project.contas;
 
-import com.caramelobank.project.entities.Cliente;
+import com.caramelobank.project.entities.Pessoa;
 
 public abstract class Conta{
 	
@@ -8,7 +8,7 @@ public abstract class Conta{
 	private int numero;
 	private double saldo;
 	private int senha;
-	protected Cliente titular;
+	protected Pessoa titular;
 	
 	
 //	Definindo métodos da class
@@ -118,11 +118,11 @@ public abstract class Conta{
 		this.senha = senhaTitular;
 	}
 
-	public Cliente getTitular() {
+	public Pessoa getTitular() {
 		return titular;
 	}
 	
 	public void setTitular() {
-		this.titular = new Cliente();
+		this.titular = new Pessoa();
 	}
 }
