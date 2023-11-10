@@ -15,10 +15,7 @@ public class PessoaJuridica extends Pessoa{
 	private String pj;
 	
 	
-	
-	
 	public PessoaJuridica() {}
-
 
 	public PessoaJuridica(String pj) {
 		super();
@@ -34,7 +31,6 @@ public class PessoaJuridica extends Pessoa{
 		result = prime * result + Objects.hash(pj);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -53,7 +49,6 @@ public class PessoaJuridica extends Pessoa{
 	public String getPj() {
 		return pj;
 	}
-
 
 	public void setPj(String pj) {
 		this.pj = pj;

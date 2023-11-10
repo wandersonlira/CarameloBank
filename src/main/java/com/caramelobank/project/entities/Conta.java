@@ -1,18 +1,44 @@
-package com.caramelobank.project.contas;
+package com.caramelobank.project.entities;
 
-import com.caramelobank.project.entities.Pessoa;
+import com.caramelobank.project.contas.DepositoNegativoException;
+import com.caramelobank.project.contas.SaldoInsuficienteException;
+import com.caramelobank.project.contas.TransferenciaException;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "tab_conta")
 public abstract class Conta{
 	
-	private int agencia;
-	private int numero;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idConta;
+	private Integer agencia;
 	private double saldo;
-	private int senha;
+	private Integer senha;
 	protected Pessoa titular;
 	
 	
-//	Definindo métodos da class
+	public Conta() {}
 	
+	public Conta(Long idConta, Integer agencia, double saldo, Integer senha, Pessoa titular) {
+		super();
+		this.idConta = idConta;
+		this.agencia = agencia;
+		this.saldo = saldo;
+		this.senha = senha;
+		this.titular = titular;
+	}
+	
+	
+	
+//	Definindo métodos da class
+
 	public void sacar(double valor) {
 		if (this.saldo < valor || valor <= 0) {
 			throw new SaldoInsuficienteException("Saldo: " + this.saldo + 
@@ -93,14 +119,6 @@ public abstract class Conta{
 	public void setAgencia(int agencia) {
 		this.agencia = agencia;
 	}
-	
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
 
 	public double getSaldo() {
 		return saldo;
@@ -124,5 +142,15 @@ public abstract class Conta{
 	
 	public void setTitular() {
 		this.titular = new Pessoa();
+	}
+
+
+	public Long getIdConta() {
+		return idConta;
+	}
+
+
+	public void setIdConta(Long idConta) {
+		this.idConta = idConta;
 	}
 }

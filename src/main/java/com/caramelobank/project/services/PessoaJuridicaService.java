@@ -13,17 +13,17 @@ import com.caramelobank.project.repositories.PessoaJuridicaRepository;
 public class PessoaJuridicaService {
 
 	@Autowired
-	private PessoaJuridicaRepository service;
+	private PessoaJuridicaRepository repository;
 	
 	
 	
 	public List<PessoaJuridica> findAll(){
-		return service.findAll();
+		return repository.findAll();
 	}
 	
 	
 	public PessoaJuridica findById(Long id) {
-		Optional<PessoaJuridica> objPessoaJuridica = service.findById(id);
+		Optional<PessoaJuridica> objPessoaJuridica = repository.findById(id);
 		return objPessoaJuridica.get();
 	}
 }
