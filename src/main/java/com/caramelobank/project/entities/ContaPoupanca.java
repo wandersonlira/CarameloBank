@@ -25,14 +25,7 @@ public class ContaPoupanca extends Conta implements Tributaveis, Serializable{
 
 	
 	public ContaPoupanca() {}
-	
-//	public ContaPoupanca(int agencia, int numero, int senhaTitular) {
-//		super();
-//		this.setAgencia(agencia);
-//		this.setNumero(numero);
-//		this.setSenha(senhaTitular);
-//	}
-	
+		
 	public ContaPoupanca(Integer numeroPoupanca) {
 	super();
 	this.numeroPoupanca = numeroPoupanca;

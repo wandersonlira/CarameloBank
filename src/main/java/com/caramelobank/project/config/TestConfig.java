@@ -8,12 +8,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.caramelobank.project.entities.Conta;
 import com.caramelobank.project.entities.ContaCorrente;
+import com.caramelobank.project.entities.ContaPoupanca;
 import com.caramelobank.project.entities.Endereco;
 import com.caramelobank.project.entities.Pessoa;
+import com.caramelobank.project.entities.PessoaConta;
 import com.caramelobank.project.repositories.ContaCorrenteRepository;
+import com.caramelobank.project.repositories.ContaPoupancaRepository;
 import com.caramelobank.project.repositories.EnderecoRepository;
+import com.caramelobank.project.repositories.PessoaContaRepository;
 import com.caramelobank.project.repositories.PessoaRepository;
 import com.caramelobank.project.viacep.ConsultaCepAPI;
 
@@ -27,52 +30,87 @@ public class TestConfig implements CommandLineRunner{
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private ContaCorrenteRepository contaCorrenteRepository;
+	@Autowired
+	private ContaPoupancaRepository contaPoupancaRepository;
+	@Autowired
+	private PessoaContaRepository pessoaContaPKRepository;
 	
 	
 
 	@Override
 	public void run(String... args) throws Exception {
 		
-//		Endereco endereco1 = new Endereco();
-//		Endereco endereco2 = new Endereco();
-//		Endereco endereco3 = new Endereco();
-//		
-//		ConsultaCepAPI api = new ConsultaCepAPI();
-//		
-//		endereco1 = api.consultaCep("50630160");
-//		endereco2 = api.consultaCep("54400020");
-//		endereco3 = api.consultaCep("50670901");
-//		
-//		
-//		
-//		Pessoa pessoa1 = new Pessoa(null, "Elon Musk", "00000000001", "bilionario@musk.com", "Ser Bilionário",
-//				LocalDate.parse("1982-04-15"), endereco1);
-//		
-//		Pessoa pessoa2 = new Pessoa(null, "Lenin", "00000000002", "uniao@lenin.com", "Comunista",
-//				LocalDate.parse("1911-10-20"), endereco2);
-//		
-//		Pessoa pessoa3 = new Pessoa(null, "Madona", "00000000003", "cantora@madona.com", "Cantora",
-//				LocalDate.parse("1979-02-11"), endereco3);
-//
-//		
-//		
-//		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
-//		pessoaRepository.saveAll(Arrays.asList(pessoa1, pessoa2, pessoa3));
+		Endereco endereco1 = new Endereco();
+		Endereco endereco2 = new Endereco();
+		Endereco endereco3 = new Endereco();
+		
+		ConsultaCepAPI api = new ConsultaCepAPI();
+		
+		endereco1 = api.consultaCep("50630160");
+		endereco2 = api.consultaCep("54400020");
+		endereco3 = api.consultaCep("50670901");
+		
+		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
+		
+//		----------------------- contaCorrente ------------------------------
+		ContaCorrente contaCorrenteMusk = new ContaCorrente();
+		
+		contaCorrenteMusk.setAgencia("00251");
+		contaCorrenteMusk.setNumeroCorrente(987);
+		contaCorrenteMusk.setSaldo(120.50);
+		contaCorrenteMusk.setSenha("elo123456");
 		
 		
+		ContaCorrente contaCorrenteMadona = new ContaCorrente();
 		
-		ContaCorrente contaCorrente = new ContaCorrente();
+		contaCorrenteMadona.setAgencia("00251");
+		contaCorrenteMadona.setNumeroCorrente(988);
+		contaCorrenteMadona.setSaldo(230.10);
+		contaCorrenteMadona.setSenha("mad123456");
 		
-		contaCorrente.setAgencia(1);
-		contaCorrente.setNumeroCorrente(00001);
-		contaCorrente.setSaldo(120.50);
-		contaCorrente.setSenha(123456);
+		contaCorrenteRepository.saveAll(Arrays.asList(contaCorrenteMusk, contaCorrenteMadona));
 		
-		contaCorrenteRepository.saveAll(Arrays.asList(contaCorrente));
+//		------------------------ contaPoupanca -----------------------------
+		ContaPoupanca contaPoupancaLenin = new ContaPoupanca();
+		
+		contaPoupancaLenin.setAgencia("354");
+		contaPoupancaLenin.setNumeroPoupanca(221);
+		contaPoupancaLenin.setSaldo(52.87);
+		contaPoupancaLenin.setSenha("len1234567");
+		
+		
+		ContaPoupanca contaPoupancaMadona = new ContaPoupanca();
+		
+		contaPoupancaMadona.setAgencia("00251");
+		contaPoupancaMadona.setNumeroPoupanca(222);
+		contaPoupancaMadona.setSaldo(30.45);
+		contaPoupancaMadona.setSenha("mad123456");
+		
+		contaPoupancaRepository.saveAll(Arrays.asList(contaPoupancaLenin, contaPoupancaMadona));
+		
+//		-------------------------- Pessoa -------------------------------
+		Pessoa elonMusk = new Pessoa(null, "Elon Musk", "00000000001", "bilionario@musk.com", "Ser Bilionário",
+				LocalDate.parse("1982-04-15"), endereco1);
+		
+		Pessoa lenin = new Pessoa(null, "Lenin", "00000000002", "uniao@lenin.com", "Comunista",
+				LocalDate.parse("1911-10-20"), endereco2);
+		
+		Pessoa madona = new Pessoa(null, "Madona", "00000000003", "cantora@madona.com", "Cantora",
+				LocalDate.parse("1979-02-11"), endereco1);
+
+		pessoaRepository.saveAll(Arrays.asList(elonMusk, lenin, madona));
+		
+//		-------------------------- PessoaConta -----------------------------
+		PessoaConta pessoaContaMusk = new PessoaConta(null, elonMusk, contaCorrenteMusk);
+		PessoaConta pessoaContaLenin= new PessoaConta(null, lenin, contaPoupancaLenin);		
+		PessoaConta pessoaContaMadona = new PessoaConta(null, madona, contaPoupancaMadona);
+		pessoaContaMadona.setConta(contaCorrenteMadona);
+		
+		pessoaContaPKRepository.saveAll(Arrays.asList(pessoaContaMusk, pessoaContaLenin, pessoaContaMadona));
+		
+
 		
 		System.out.println("PRONTO!!");
-		
-		
 		
 		
 		

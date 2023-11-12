@@ -2,7 +2,9 @@ package com.caramelobank.project.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -27,13 +30,14 @@ public class Pessoa implements Serializable{
 	private String email;
 	private String profissao;
 	private LocalDate dataNascimento;
-	
 	@ManyToOne
-	@JoinColumn(name = "codigo_client_id")
+	@JoinColumn(name = "codigo_endereco_id")
 	private Endereco tabEndereco;
+	@OneToMany(mappedBy = "pessoa")
+	private Set<PessoaConta> pessoaConta = new HashSet<>();
 
 	
-	
+
 	public Pessoa() {}
 	
 	
@@ -140,13 +144,22 @@ public class Pessoa implements Serializable{
 	public void setEndereco(Endereco endereco) {
 		this.tabEndereco = endereco;
 	}
+	
+	
+	public Set<Conta> getConta() {
+		Set<Conta> setConta = new HashSet<Conta>();
+		for (PessoaConta pessoaConta : pessoaConta) {
+			setConta.add((Conta) pessoaConta.getConta());
+		}
+		return setConta;
+	}
 
 	
 
 	@Override
 	public String toString() {
 		return "Cliente [id=" + idCliente + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", profissao=" + profissao
-				+ ", dataNascimento=" + dataNascimento + ", endereco=" + tabEndereco + "]";
+				+ ", dataNascimento=" + dataNascimento + ", endereco=" + tabEndereco +  "]";
 	}
 	
 

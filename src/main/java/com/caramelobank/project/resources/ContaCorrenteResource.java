@@ -27,6 +27,7 @@ public class ContaCorrenteResource {
 	}
 	
 	
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ContaCorrente> findById(@PathVariable Long id) {
 		ContaCorrente objContaCorrente = service.findById(id);

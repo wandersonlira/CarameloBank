@@ -25,13 +25,6 @@ public class ContaCorrente extends Conta implements Tributaveis, Serializable{
 	
 	
 	public ContaCorrente() {}
-
-//	public ContaCorrente(int agencia, int numero, int senhaTitular) {
-//		super();
-//		this.setAgencia(agencia);
-//		this.setNumero(numero);	
-//		this.setSenha(senhaTitular);
-//	}
 	
 	public ContaCorrente(int numeroCorrente) {
 	super();

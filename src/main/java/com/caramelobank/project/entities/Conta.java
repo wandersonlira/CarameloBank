@@ -1,38 +1,48 @@
 package com.caramelobank.project.entities;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.caramelobank.project.contas.DepositoNegativoException;
 import com.caramelobank.project.contas.SaldoInsuficienteException;
 import com.caramelobank.project.contas.TransferenciaException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
 @Entity
 @Table(name = "tab_conta")
-public abstract class Conta{
+public abstract class Conta implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idConta;
-	private Integer agencia;
+	private String agencia;
 	private double saldo;
-	private Integer senha;
-	protected Pessoa titular;
+	private String senha;
+	@OneToMany(mappedBy = "conta")
+	protected Set<PessoaConta> pessoaConta = new HashSet<>();
 	
 	
+	
+
 	public Conta() {}
 	
-	public Conta(Long idConta, Integer agencia, double saldo, Integer senha, Pessoa titular) {
+	public Conta(Long idConta, String agencia, double saldo, String senha) {
 		super();
 		this.idConta = idConta;
 		this.agencia = agencia;
 		this.saldo = saldo;
 		this.senha = senha;
-		this.titular = titular;
 	}
 	
 	
@@ -44,7 +54,7 @@ public abstract class Conta{
 			throw new SaldoInsuficienteException("Saldo: " + this.saldo + 
 					", Saque: " + valor);
 		} else { 
-			this.validarSenha(getSenha());
+			this.validarSenha(this.senha);
 			this.saldo -= valor; }
 		
 	}
@@ -71,14 +81,9 @@ public abstract class Conta{
 	}
 	
 	
-//	public void cadastrarConta() {
-//		
-//		
-//	}
 	
-	
-	public boolean validarSenha(int senhaTitular) {
-		if (senhaTitular == this.getSenha()) {
+	public boolean validarSenha(String senhaTitular) {
+		if (senhaTitular.equals(this.senha) == true) {
 			return true;
 		}
 		
@@ -101,24 +106,28 @@ public abstract class Conta{
 		}	
 	}
 	
-	
-//	Exibe dados e endereço do cliente
-	
-//	public void exibirCliente() {
-//		this.titular.exibirTitular();
-//		this.titular.getEndereco().exibirEndereco();
-//	}
 
 	
 //  Criado método get e set para manipular os atributos
 	
-	public int getAgencia() {
+	
+	public Long getIdConta() {
+		return idConta;
+	}
+
+	public void setIdConta(Long idConta) {
+		this.idConta = idConta;
+	}
+	
+	
+	public String getAgencia() {
 		return agencia;
 	}
 	
-	public void setAgencia(int agencia) {
+	public void setAgencia(String agencia) {
 		this.agencia = agencia;
 	}
+	
 
 	public double getSaldo() {
 		return saldo;
@@ -128,29 +137,21 @@ public abstract class Conta{
 		this.saldo = saldo;
 	}
 	
-	public int getSenha() {
+	
+	public String getSenha() {
 		return senha;
 	}
 	
-	public void setSenha(int senhaTitular) {
+	public void setSenha(String senhaTitular) {
 		this.senha = senhaTitular;
 	}
-
-	public Pessoa getTitular() {
-		return titular;
-	}
 	
-	public void setTitular() {
-		this.titular = new Pessoa();
+
+	@JsonIgnore
+	public Set<PessoaConta> getPessoaConta() {
+		return pessoaConta;
 	}
 
-
-	public Long getIdConta() {
-		return idConta;
-	}
-
-
-	public void setIdConta(Long idConta) {
-		this.idConta = idConta;
-	}
+	
+	
 }

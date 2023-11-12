@@ -36,7 +36,6 @@ public class Endereco implements Serializable{
   	private String ddd;
   	private String siafi;
   	private String numeroCasa;
-  	
   	@JsonIgnore
   	@OneToMany(mappedBy = "tabEndereco")
   	private List<Pessoa> clientes = new ArrayList<>();
