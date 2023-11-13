@@ -23,7 +23,6 @@ public class ContaCorrente extends Conta implements Tributaveis, Serializable{
 	private Integer numeroCorrente;
 	
 	
-	
 	public ContaCorrente() {}
 	
 	public ContaCorrente(int numeroCorrente) {
@@ -109,6 +108,6 @@ public class ContaCorrente extends Conta implements Tributaveis, Serializable{
 	public Integer getNumeroCorrente() {
 		return numeroCorrente;
 	}
-
 	
+		
 }

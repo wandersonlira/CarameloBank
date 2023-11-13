@@ -7,7 +7,6 @@ import java.util.Set;
 import com.caramelobank.project.contas.DepositoNegativoException;
 import com.caramelobank.project.contas.SaldoInsuficienteException;
 import com.caramelobank.project.contas.TransferenciaException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,8 +30,6 @@ public abstract class Conta implements Serializable{
 	private String senha;
 	@OneToMany(mappedBy = "conta")
 	protected Set<PessoaConta> pessoaConta = new HashSet<>();
-	
-	
 	
 
 	public Conta() {}
@@ -145,13 +142,6 @@ public abstract class Conta implements Serializable{
 	public void setSenha(String senhaTitular) {
 		this.senha = senhaTitular;
 	}
-	
-
-	@JsonIgnore
-	public Set<PessoaConta> getPessoaConta() {
-		return pessoaConta;
-	}
-
-	
+		
 	
 }

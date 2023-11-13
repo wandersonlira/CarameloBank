@@ -7,19 +7,19 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "tab_pj")
+@Table(name = "tab_cnpj")
 public class PessoaJuridica extends Pessoa{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String pj;
+	private String cnpj;
 	
 	
 	public PessoaJuridica() {}
 
-	public PessoaJuridica(String pj) {
+	public PessoaJuridica(String cnpj) {
 		super();
-		this.pj = pj;
+		this.cnpj = cnpj;
 	}
 
 
@@ -28,7 +28,7 @@ public class PessoaJuridica extends Pessoa{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(pj);
+		result = prime * result + Objects.hash(cnpj);
 		return result;
 	}
 
@@ -41,23 +41,23 @@ public class PessoaJuridica extends Pessoa{
 		if (getClass() != obj.getClass())
 			return false;
 		PessoaJuridica other = (PessoaJuridica) obj;
-		return Objects.equals(pj, other.pj);
+		return Objects.equals(cnpj, other.cnpj);
 	}
 
 	
 
-	public String getPj() {
-		return pj;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setPj(String pj) {
-		this.pj = pj;
+	public void setCnpj(String pj) {
+		this.cnpj = pj;
 	}
 
 
 	@Override
 	public String toString() {
-		return "PessoaJuridica [pj=" + pj + "]";
+		return "PessoaJuridica [cnpj=" + cnpj + "]";
 	}
 	
 	

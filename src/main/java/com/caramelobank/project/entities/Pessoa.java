@@ -145,11 +145,11 @@ public class Pessoa implements Serializable{
 		this.tabEndereco = endereco;
 	}
 	
-	
+
 	public Set<Conta> getConta() {
 		Set<Conta> setConta = new HashSet<Conta>();
 		for (PessoaConta pessoaConta : pessoaConta) {
-			setConta.add((Conta) pessoaConta.getConta());
+			setConta.add(pessoaConta.getConta());
 		}
 		return setConta;
 	}

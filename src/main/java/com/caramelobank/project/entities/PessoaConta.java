@@ -3,7 +3,6 @@ package com.caramelobank.project.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,11 +27,10 @@ public class PessoaConta implements Serializable{
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 	
-	@Embedded
 	@ManyToOne
 	@JoinColumn(name = "conta_id")
 	private Conta conta;
-	
+
 
 	public PessoaConta() {}
 	
@@ -58,6 +56,7 @@ public class PessoaConta implements Serializable{
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	
 	public Conta getConta() {
 		return conta;
 	}
